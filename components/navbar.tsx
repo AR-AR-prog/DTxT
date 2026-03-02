@@ -1,9 +1,69 @@
 'use client'
 
+import { useEffect, useState } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 
+type MeResponseUser = {
+  id: string
+  email: string
+  fullName: string | null
+  apiUsageCount: number
+  apiUsageLimit: number
+}
+
 export default function Navbar() {
+  const router = useRouter()
+  const [user, setUser] = useState<MeResponseUser | null>(null)
+  const [isLoadingUser, setIsLoadingUser] = useState(true)
+
+  useEffect(() => {
+    let isMounted = true
+
+    const fetchUser = async () => {
+      try {
+        const res = await fetch("/api/auth/me", {
+          credentials: "include",
+        })
+        if (!res.ok) return
+        const data = await res.json()
+        if (!isMounted) return
+        setUser(data.user ?? null)
+      } catch {
+        if (!isMounted) return
+        setUser(null)
+      } finally {
+        if (isMounted) {
+          setIsLoadingUser(false)
+        }
+      }
+    }
+
+    fetchUser()
+
+    return () => {
+      isMounted = false
+    }
+  }, [])
+
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/auth/logout", {
+        method: "POST",
+        credentials: "include",
+      })
+    } catch {
+      // ignore
+    } finally {
+      setUser(null)
+      router.push("/")
+      router.refresh()
+    }
+  }
+
+  const displayName = user?.fullName || user?.email
+
   return (
     <nav className="fixed top-0 w-full bg-background/80 backdrop-blur-md border-b border-border z-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -29,18 +89,39 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Auth Buttons */}
-          <div className="flex gap-3">
-            <Link href="/login">
-              <Button variant="ghost" className="text-sm">
-                Login
-              </Button>
-            </Link>
-            <Link href="/register">
-              <Button className="text-sm">
-                Get Started
-              </Button>
-            </Link>
+          {/* Auth / User */}
+          <div className="flex items-center gap-3">
+            {user && !isLoadingUser ? (
+              <>
+                <span className="hidden sm:inline text-sm text-foreground/70">
+                  Signed in as{" "}
+                  <span className="font-medium text-foreground">
+                    {displayName}
+                  </span>
+                </span>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="text-sm"
+                  onClick={handleLogout}
+                >
+                  Sign out
+                </Button>
+              </>
+            ) : (
+              <>
+                <Link href="/login">
+                  <Button variant="ghost" className="text-sm">
+                    Login
+                  </Button>
+                </Link>
+                <Link href="/register">
+                  <Button className="text-sm">
+                    Get Started
+                  </Button>
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>

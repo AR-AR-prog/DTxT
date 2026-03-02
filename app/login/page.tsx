@@ -2,16 +2,39 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 
 export default function LoginPage() {
+  const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Frontend only - no actual authentication
-    console.log('Login attempt:', { email, password })
+    setError('')
+    setIsLoading(true)
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+        credentials: 'include',
+      })
+      const data = await res.json()
+      if (!res.ok) {
+        setError(data.error ?? 'Login failed')
+        return
+      }
+      router.push('/')
+      router.refresh()
+    } catch {
+      setError('Something went wrong. Please try again.')
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -71,9 +94,11 @@ export default function LoginPage() {
               </a>
             </div>
 
-            {/* Login Button */}
-            <Button type="submit" size="lg" className="w-full">
-              Sign In
+            {error && (
+              <p className="text-sm text-destructive">{error}</p>
+            )}
+            <Button type="submit" size="lg" className="w-full" disabled={isLoading}>
+              {isLoading ? 'Signing in...' : 'Sign In'}
             </Button>
           </form>
 
@@ -95,10 +120,6 @@ export default function LoginPage() {
           </Link>
         </div>
 
-        {/* Footer Link */}
-        <p className="text-center text-xs text-foreground/60 mt-8">
-          This is a demo. No actual authentication is implemented.
-        </p>
       </div>
     </div>
   )
