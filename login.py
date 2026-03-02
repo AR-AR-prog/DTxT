@@ -88,7 +88,7 @@ root.title("agpAIso - Fake News Detection 2.0")
 root.geometry("400x300")
 root.configure(bg="#F3F4F6")
 
-lbl_title = tk.Label(root, text="🔒 agpAIso", font=("Times New Romans", 20, "bold"), bg="#F3F4F6", fg="#1E3A8A")
+lbl_title = tk.Label(root, text=" agpAIso", font=("Times New Romans", 20, "bold"), bg="#F3F4F6", fg="#1E3A8A")
 lbl_title.pack(pady=10)
 
 lbl_subtitle = tk.Label(root, text="AI Fake News Detection for CCIS Students 2.0", font=("Roboto", 10), bg="#F3F4F6", fg="#10B981")
