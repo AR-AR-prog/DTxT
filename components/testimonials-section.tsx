@@ -1,127 +1,135 @@
 export default function TestimonialsSection() {
   const testimonials = [
     {
-      id: "ANC-0088",
+      id: "CCIS-0088",
       quote:
-        "I used to dread opening Gmail. Now I watch the cursor move and feel like I hired a dedicated chief of staff. It captures my tone so perfectly it's honestly a little scary.",
-      author: "Alex Chen",
-      role: "FOUNDER & VESSEL",
+        "I used to spend 20 minutes cross-checking a single news article before citing it in my paper. agpAIso cuts that down to under a minute and gives me structured reasoning I can actually show my professor.",
+      author: "Mikael Santos",
+      role: "BS IS · 3rd Year",
     },
     {
-      id: "ANC-2301",
+      id: "CCIS-2301",
       quote:
-        "The first AI tool that doesn't sound like AI. It's brief, polite, and ruthlessly efficient. Just how I like it. I saved 14 hours last week.",
-      author: "Marcus Otero",
-      role: "PARTNER & SEQUOIA",
+        "The counter-facts section is what sold me. It's not just a score — it tells you exactly which claims are questionable and why. That's the kind of detail I need for research work.",
+      author: "Clarisse Reyes",
+      role: "BS CS · 2nd Year",
     },
     {
-      id: "ANC-7725",
+      id: "CCIS-7725",
       quote:
-        "Typewriter handles 80% of my inbox before I've had coffee. It's not just a productivity tool, it's a lifestyle change.",
-      author: "Sarah Jenkins",
-      role: "CEO & LINEAR",
+        "I checked a viral campus link that everyone was sharing. agpAIso flagged it as low credibility and explained the author credentials were unverifiable. Nobody else bothered to look that up.",
+      author: "Jerome Tan",
+      role: "BS IT · 4th Year",
     },
     {
-      id: "ANC-0030",
+      id: "CCIS-0030",
       quote:
-        "It knows when to be formal and when to use an emoji. It's like it read my mind before I even typed the prompt.",
-      author: "Elena Fisher",
-      role: "PRODUCT & NOTION",
+        "Google gives me a list of sources. agpAIso actually tells me which ones to trust and why. That distinction matters when you're writing a thesis and every citation counts.",
+      author: "Andrea Lim",
+      role: "BS CS · 3rd Year",
     },
     {
-      id: "ANC-2134",
-      quote: "The minimalist interface is a breath of fresh air. Finally, software that respects my attention span.",
-      author: "David Park",
-      role: "DIRECTOR & FIGMA",
+      id: "CCIS-2134",
+      quote:
+        "Clean interface, clear results. I submitted a URL, read the verdict in 5 seconds, and moved on. That's exactly what I needed during finals week when every hour mattered.",
+      author: "Darren Cruz",
+      role: "BS IS · 2nd Year",
     },
   ]
 
   return (
-    <section className="py-24">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="flex items-start justify-between mb-16">
+    <section id="testimonials" className="py-24">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="mb-16 flex items-start justify-between gap-6">
           <div>
-            <span className="text-xs font-mono text-muted-foreground tracking-wider">◆ HALL OF FAME</span>
-            <h2 className="font-serif text-4xl md:text-5xl mt-4 max-w-md leading-tight">
-              Founders who never write alone
+            <span className="section-kicker">Student voices</span>
+            <h2 className="mt-4 max-w-lg font-serif text-4xl leading-tight md:text-5xl">
+              What CCIS students actually say
             </h2>
           </div>
-          <p className="text-muted-foreground text-sm max-w-xs hidden md:block">
-            Uncensored correspondence from the network.
+          <p className="hidden max-w-xs text-sm text-muted-foreground md:block">
+            Framed as field notes and use cases, not filler praise. The product has to earn trust on the page too.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {testimonials.slice(0, 3).map((testimonial, index) => (
-            <div key={testimonial.id} className="bg-card border border-border rounded-2xl p-6">
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-xs font-mono text-muted-foreground">REF</span>
-                <span className="text-xs font-mono text-primary">{testimonial.id}</span>
-                <div className="w-12 h-12 bg-secondary rounded-lg" />
+        <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="editorial-shell rounded-[1.8rem] p-6 sm:p-8">
+            <div className="flex flex-wrap items-start justify-between gap-4 border-b border-border/70 pb-5">
+              <div>
+                <p className="text-[11px] font-mono uppercase tracking-[0.2em] text-muted-foreground">Featured testimony</p>
+                <h3 className="mt-3 max-w-2xl font-serif text-3xl leading-tight text-foreground sm:text-4xl">
+                  “{testimonials[0].quote}”
+                </h3>
               </div>
-              <p className="text-sm leading-relaxed mb-6">{testimonial.quote}</p>
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-medium text-sm">{testimonial.author}</p>
-                  <p className="text-xs font-mono text-muted-foreground">{testimonial.role}</p>
-                </div>
-                <div className="w-4 h-4 border border-border rounded flex items-center justify-center">
-                  <span className="text-[8px]">↗</span>
-                </div>
+              <div className="rounded-2xl border border-border/70 bg-secondary/55 px-4 py-3 text-right">
+                <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-muted-foreground">Reference</p>
+                <p className="mt-2 font-mono text-sm text-primary">{testimonials[0].id}</p>
               </div>
             </div>
-          ))}
-        </div>
 
-        <div className="grid md:grid-cols-3 gap-6 mt-6">
-          {testimonials.slice(3, 4).map((testimonial) => (
-            <div key={testimonial.id} className="bg-card border border-border rounded-2xl p-6">
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-xs font-mono text-muted-foreground">REF</span>
-                <span className="text-xs font-mono text-primary">{testimonial.id}</span>
-                <div className="w-12 h-12 bg-secondary rounded-lg" />
+            <div className="mt-5 flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <p className="font-medium text-foreground">{testimonials[0].author}</p>
+                <p className="text-xs font-mono text-muted-foreground">{testimonials[0].role}</p>
               </div>
-              <p className="text-sm leading-relaxed mb-6">{testimonial.quote}</p>
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-medium text-sm">{testimonial.author}</p>
-                  <p className="text-xs font-mono text-muted-foreground">{testimonial.role}</p>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <div className="rounded-2xl border border-border/70 bg-[#fcfaf5] px-4 py-3">
+                  <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-muted-foreground">Used for</p>
+                  <p className="mt-2 text-sm leading-relaxed text-foreground/68">Citation checks, thesis research, and fast source triage during deadlines.</p>
                 </div>
-                <div className="w-4 h-4 border border-border rounded flex items-center justify-center">
-                  <span className="text-[8px]">↗</span>
+                <div className="rounded-2xl border border-border/70 bg-white/80 px-4 py-3">
+                  <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-muted-foreground">Product signal</p>
+                  <p className="mt-2 text-sm leading-relaxed text-foreground/68">Users value reasoning and counter-facts more than a raw score.</p>
                 </div>
               </div>
             </div>
-          ))}
-
-          {/* Join CTA */}
-          <div className="bg-secondary/50 border border-dashed border-border rounded-2xl p-6 flex flex-col items-center justify-center text-center">
-            <div className="w-8 h-8 rounded-full border border-border flex items-center justify-center mb-3">
-              <span className="text-lg">+</span>
-            </div>
-            <span className="text-sm font-mono text-muted-foreground">YOUR STORY HERE</span>
-            <p className="text-sm text-muted-foreground mt-1">Join the archive.</p>
           </div>
 
-          {testimonials.slice(4).map((testimonial) => (
-            <div key={testimonial.id} className="bg-card border border-border rounded-2xl p-6">
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-xs font-mono text-muted-foreground">REF</span>
-                <span className="text-xs font-mono text-primary">{testimonial.id}</span>
-                <div className="w-12 h-12 bg-secondary rounded-lg" />
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-1">
+            {testimonials.slice(1, 3).map((testimonial) => (
+              <div key={testimonial.id} className="editorial-shell h-full rounded-[1.5rem] p-5">
+                <div className="mb-4 flex items-center justify-between gap-3 border-b border-border/70 pb-4">
+                  <span className="text-xs font-mono uppercase tracking-[0.18em] text-muted-foreground">Field note</span>
+                  <span className="text-xs font-mono text-primary">{testimonial.id}</span>
+                </div>
+                <p className="min-h-28 text-sm leading-relaxed text-foreground/78">“{testimonial.quote}”</p>
+                <div className="mt-5 flex items-center justify-between gap-3">
+                  <div>
+                    <p className="font-medium text-sm text-foreground">{testimonial.author}</p>
+                    <p className="text-xs font-mono text-muted-foreground">{testimonial.role}</p>
+                  </div>
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-border/70 bg-white text-primary font-serif">
+                    {testimonial.author.charAt(0)}
+                  </div>
+                </div>
               </div>
-              <p className="text-sm leading-relaxed mb-6">{testimonial.quote}</p>
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-medium text-sm">{testimonial.author}</p>
-                  <p className="text-xs font-mono text-muted-foreground">{testimonial.role}</p>
-                </div>
-                <div className="w-4 h-4 border border-border rounded flex items-center justify-center">
-                  <span className="text-[8px]">↗</span>
-                </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-6 grid gap-6 md:grid-cols-3">
+          {testimonials.slice(3).map((testimonial) => (
+            <div key={testimonial.id} className="editorial-shell h-full rounded-[1.5rem] p-5">
+              <div className="mb-4 flex items-center justify-between gap-3 border-b border-border/70 pb-4">
+                <span className="text-xs font-mono uppercase tracking-[0.18em] text-muted-foreground">Archive</span>
+                <span className="text-xs font-mono text-primary">{testimonial.id}</span>
+              </div>
+              <p className="min-h-24 text-sm leading-relaxed text-foreground/78">“{testimonial.quote}”</p>
+              <div className="mt-5">
+                <p className="font-medium text-sm text-foreground">{testimonial.author}</p>
+                <p className="text-xs font-mono text-muted-foreground">{testimonial.role}</p>
               </div>
             </div>
           ))}
+
+          <div className="paper-grid rounded-[1.5rem] border border-dashed border-border/80 bg-[#f9f3e8] p-5">
+            <p className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">What users keep emphasizing</p>
+            <ul className="mt-4 space-y-3 text-sm leading-relaxed text-foreground/70">
+              <li>Reasoning matters more than decorative AI language.</li>
+              <li>Counter-facts make the tool useful for real academic scrutiny.</li>
+              <li>Speed is valuable only when the result still feels responsible.</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>

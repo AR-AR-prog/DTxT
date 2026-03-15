@@ -4,25 +4,25 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #faf8f6;
-  --foreground: #1a1a1a;
-  --card: #ffffff;
-  --card-foreground: #1a1a1a;
-  --popover: #ffffff;
-  --popover-foreground: #1a1a1a;
-  --primary: #1b5e4a;
+  --background: #f6f1e8;
+  --foreground: #191815;
+  --card: #fffdf8;
+  --card-foreground: #1a1a1b;
+  --popover: #fffdf8;
+  --popover-foreground: #1a1a1b;
+  --primary: #1f4d43;
   --primary-foreground: #ffffff;
-  --secondary: #f0ebe8;
-  --secondary-foreground: #1a1a1a;
-  --muted: #e5dfd9;
-  --muted-foreground: #6b7280;
-  --accent: #1b5e4a;
+  --secondary: #ece5d8;
+  --secondary-foreground: #1a1a1b;
+  --muted: #dfd7c8;
+  --muted-foreground: #655f57;
+  --accent: #2f5b87;
   --accent-foreground: #ffffff;
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: #e5dfd9;
-  --input: #f0ebe8;
-  --ring: #1b5e4a;
+  --border: #d7cfbf;
+  --input: #efe8dc;
+  --ring: #2f5b87;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -37,6 +37,9 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --motion-fast: 200ms;
+  --motion-base: 300ms;
+  --motion-emphasis: 700ms;
 }
 
 @theme inline {
@@ -87,5 +90,114 @@
   }
   body {
     @apply bg-background text-foreground;
+    background-image:
+      radial-gradient(circle at 12% 14%, rgba(47, 91, 135, 0.1), transparent 24%),
+      radial-gradient(circle at 88% 8%, rgba(31, 77, 67, 0.1), transparent 22%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0)),
+      linear-gradient(90deg, rgba(125, 108, 84, 0.035) 1px, transparent 1px),
+      linear-gradient(rgba(125, 108, 84, 0.035) 1px, transparent 1px);
+    background-size: auto, auto, auto, 32px 32px, 32px 32px;
+    background-attachment: fixed;
+  }
+
+  @media (max-width: 768px) {
+    body {
+      background-attachment: scroll;
+      background-size: auto, auto, auto, 24px 24px, 24px 24px;
+    }
+  }
+
+  @media (max-height: 860px) {
+    .short-vp-hide {
+      display: none !important;
+    }
+
+    .short-vp-tight {
+      padding-top: 0.75rem !important;
+      padding-bottom: 0.75rem !important;
+    }
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--accent) 22%, white);
+    color: var(--foreground);
+  }
+}
+
+@layer components {
+  .editorial-shell {
+    @apply relative overflow-hidden border border-border/80 bg-white/85 shadow-[0_20px_60px_rgba(42,37,28,0.08)];
+  }
+
+  .editorial-shell::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0)),
+      linear-gradient(90deg, rgba(120, 105, 82, 0.06), transparent 18%, transparent 82%, rgba(120, 105, 82, 0.05));
+  }
+
+  .section-kicker {
+    @apply inline-flex items-center gap-2 rounded-full border border-border/80 bg-white/70 px-3 py-1 text-[11px] font-mono uppercase tracking-[0.26em] text-foreground/55;
+  }
+
+  .paper-grid {
+    background-image:
+      linear-gradient(90deg, rgba(116, 101, 78, 0.06) 1px, transparent 1px),
+      linear-gradient(rgba(116, 101, 78, 0.06) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+
+  .ink-rule {
+    @apply h-px w-full bg-linear-to-r from-transparent via-border to-transparent;
+  }
+
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .editorial-section {
+    @apply relative;
+  }
+
+  .editorial-section::after {
+    content: "";
+    position: absolute;
+    left: 8%;
+    right: 8%;
+    bottom: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(143, 129, 108, 0.35), transparent);
+    pointer-events: none;
+  }
+
+  .document-card {
+    @apply rounded-[1.4rem] border border-border/80 bg-white/86 shadow-[0_16px_30px_rgba(38,33,25,0.08)];
+  }
+
+  .verdict-strong {
+    @apply border-[#c8d8ce] bg-[#ecf3ee] text-[#2a5344];
+  }
+
+  .verdict-caution {
+    @apply border-[#e0d2b5] bg-[#f8f1e3] text-[#725b2c];
+  }
+
+  .verdict-risk {
+    @apply border-[#dfc6bf] bg-[#f7ece9] text-[#6a4338];
   }
 }

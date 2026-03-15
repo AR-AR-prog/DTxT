@@ -14,9 +14,11 @@ model User {
   id              String   @id @default(cuid())
   email           String   @unique
   fullName        String
-  passwordHash    String
+  passwordHash    String?
+  googleId        String?  @unique @map("google_id")
   apiUsageCount   Int      @default(0) @map("api_usage_count")
-  apiUsageLimit   Int      @default(5) @map("api_usage_limit")
+  apiUsageLimit   Int      @default(50) @map("api_usage_limit")
+  apiUsageResetAt DateTime? @map("api_usage_reset_at")
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 

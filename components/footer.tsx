@@ -4,67 +4,59 @@ import Link from "next/link"
 
 export default function Footer() {
   return (
-    <footer className="py-12 border-t border-border bg-background">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          {/* Brand */}
+    <footer className="border-t border-border/70 bg-background py-12">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="editorial-shell mb-8 grid grid-cols-1 gap-8 rounded-[1.8rem] p-8 md:grid-cols-4">
           <div>
-            <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <span className="text-primary-foreground font-serif font-bold text-sm">A</span>
+            <Link href="/" className="flex items-center gap-2 mb-4 transition-opacity duration-200 hover:opacity-80">
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-border/80 bg-white">
+                <span className="text-primary font-serif font-bold text-sm">A</span>
               </div>
               <span className="font-serif text-lg font-bold text-foreground">agpAIso</span>
             </Link>
-            <p className="text-sm text-foreground/60">
-              AI-powered URL credibility analysis for CCIS students.
+            <p className="text-sm leading-relaxed text-foreground/60">
+              AI-powered URL credibility analysis designed as a calm research desk for CCIS students.
             </p>
           </div>
 
-          {/* Product */}
           <div>
-            <h4 className="font-semibold text-foreground mb-4 text-sm">Product</h4>
+            <h4 className="mb-4 text-sm font-semibold text-foreground">Product</h4>
             <ul className="space-y-3">
               <li>
-                <Link href="#features" className="text-foreground/60 hover:text-foreground text-sm transition">
+                <Link href="#features" className="text-foreground/60 hover:text-foreground text-sm transition-colors duration-200 hover:underline underline-offset-2">
                   Features
                 </Link>
               </li>
               <li>
-                <Link href="#how-it-works" className="text-foreground/60 hover:text-foreground text-sm transition">
+                <Link href="#how-it-works" className="text-foreground/60 hover:text-foreground text-sm transition-colors duration-200 hover:underline underline-offset-2">
                   How It Works
                 </Link>
               </li>
               <li>
-                <Link href="#about" className="text-foreground/60 hover:text-foreground text-sm transition">
-                  About
+                <Link href="#testimonials" className="text-foreground/60 hover:text-foreground text-sm transition-colors duration-200 hover:underline underline-offset-2">
+                  Student Voices
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Legal */}
           <div>
-            <h4 className="font-semibold text-foreground mb-4 text-sm">Legal</h4>
+            <h4 className="mb-4 text-sm font-semibold text-foreground">Guidance</h4>
             <ul className="space-y-3">
               <li>
-                <a href="#" className="text-foreground/60 hover:text-foreground text-sm transition">
-                  Privacy Policy
-                </a>
+                <Link href="#faq" className="text-foreground/60 hover:text-foreground text-sm transition-colors duration-200 hover:underline underline-offset-2">FAQ</Link>
               </li>
               <li>
-                <a href="#" className="text-foreground/60 hover:text-foreground text-sm transition">
-                  Terms of Service
-                </a>
+                <Link href="#pricing" className="text-foreground/60 hover:text-foreground text-sm transition-colors duration-200 hover:underline underline-offset-2">Pricing</Link>
               </li>
             </ul>
           </div>
 
-          {/* Contact */}
           <div>
-            <h4 className="font-semibold text-foreground mb-4 text-sm">Contact</h4>
+            <h4 className="mb-4 text-sm font-semibold text-foreground">Contact</h4>
             <ul className="space-y-3">
               <li>
-                <a href="mailto:info@agpaiso.com" className="text-foreground/60 hover:text-foreground text-sm transition">
+                <a href="mailto:info@agpaiso.com" className="text-foreground/60 hover:text-foreground text-sm transition-colors duration-200 hover:underline underline-offset-2">
                   info@agpaiso.com
                 </a>
               </li>
@@ -72,9 +64,9 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-border">
-          <p className="text-xs text-foreground/60 mb-4 md:mb-0">© 2026 agpAIso. CCIS Project. Academic Prototype.</p>
-          <p className="text-xs text-foreground/60">Built for information verification in 2026.</p>
+        <div className="flex flex-col items-center justify-between gap-3 pt-2 md:flex-row">
+          <p className="text-xs text-foreground/60">© 2026 agpAIso. CCIS Project. Academic prototype.</p>
+          <p className="text-xs text-foreground/60">Built for information verification, source review, and better research decisions.</p>
         </div>
       </div>
     </footer>

@@ -1,0 +1,27 @@
+# agpAIso – AI Assistant Instructions
+
+## CONTEXT FILE — always keep it updated
+There is a `CONTEXT.md` file at the root of this project.  
+**After every meaningful change**, update `CONTEXT.md` to reflect what was added, changed, or removed.  
+`CONTEXT.md` is model-agnostic — it is the shared source of truth for Copilot, Claude, GPT, Gemini, and any other AI used in this project.  
+Keep the existing structure intact — only add or modify the relevant sections.
+
+## What counts as a meaningful change
+- New page, route, or API endpoint
+- New or changed database model / Prisma schema
+- New feature or significant UI change
+- Auth or security changes
+- Environment variable additions
+- Dependency additions
+
+## Project Summary (quick reference)
+- **Stack:** Next.js 16 App Router, React 19, Tailwind, Prisma 7, SQLite, bcryptjs, jose (JWT), zod
+- **AI:** Google Gemini API for URL credibility analysis (server-side only)
+- **Auth:** JWT in HTTP-only cookie `agpaiso_session`
+- **Validation:** Zod on API routes, client-side checks in forms
+
+## General Rules
+- Use TypeScript strictly
+- Never expose `GEMINI_API_KEY` or any secret to the client
+- Prefer editing existing files over creating new ones
+- Keep components in `components/`, API routes in `app/api/`, utilities in `lib/`

@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
+import { GoogleSignInButton } from '@/components/google-sign-in-button'
 
 export default function LoginPage() {
   const router = useRouter()
@@ -38,10 +39,21 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center px-4">
-      <div className="w-full max-w-md">
+    <div className="min-h-screen overflow-y-auto bg-background px-4 py-6 sm:py-8 lg:flex lg:items-center lg:justify-center lg:py-10">
+      <div className="w-full max-w-4xl grid lg:grid-cols-2 gap-8 items-stretch">
+        <div className="hidden lg:flex rounded-3xl border border-border bg-white/70 p-10 flex-col justify-center">
+          <div>
+            <p className="text-xs font-mono tracking-widest text-foreground/50 mb-3">SECURE ACCESS</p>
+            <h2 className="font-serif text-4xl text-foreground mb-4">Welcome back to your verification workspace.</h2>
+            <p className="text-foreground/60 leading-relaxed">Continue reviewing sources, checking credibility scores, and managing your account context.</p>
+          </div>
+          <div className="mt-8 rounded-2xl border border-border bg-background p-4 text-sm text-foreground/70">
+            Tip: Use Google sign-in if your account was created with Google.
+          </div>
+        </div>
+        <div className="w-full max-w-md mx-auto">
         {/* Header */}
-        <div className="text-center mb-12">
+        <div className="short-vp-tight text-center mb-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
           <Link href="/" className="flex items-center justify-center gap-2 mb-8">
             <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
               <span className="text-primary-foreground font-serif font-bold text-lg">A</span>
@@ -53,7 +65,20 @@ export default function LoginPage() {
         </div>
 
         {/* Form Card */}
-        <div className="bg-white rounded-2xl border border-border p-8 shadow-sm">
+        <div className="short-vp-tight bg-white rounded-2xl border border-border p-8 shadow-sm animate-in fade-in slide-in-from-bottom-4 duration-500" style={{ animationDelay: "100ms" }}>
+          <div className="mb-6">
+            <GoogleSignInButton mode="login" />
+          </div>
+
+          <div className="relative mb-6">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-border"></div>
+            </div>
+            <div className="relative flex justify-center text-sm">
+              <span className="px-2 bg-white text-foreground/60">Or continue with email</span>
+            </div>
+          </div>
+
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Email Field */}
             <div className="space-y-2">
@@ -120,6 +145,7 @@ export default function LoginPage() {
           </Link>
         </div>
 
+        </div>
       </div>
     </div>
   )
