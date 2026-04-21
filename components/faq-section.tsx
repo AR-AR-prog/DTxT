@@ -35,17 +35,17 @@ export default function FaqSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0)
 
   return (
-    <section id="faq" className="border-t border-border/70 py-24">
+    <section id="faq" className="border-t border-border py-24">
       <div className="mx-auto grid max-w-6xl gap-10 px-6 lg:grid-cols-[0.85fr_1.15fr]">
         <div className="space-y-5">
           <span className="section-kicker">Questions</span>
           <h2 className="max-w-xl font-serif text-4xl leading-tight md:text-5xl">
             Questions people ask before they trust an AI verdict
           </h2>
-          <p className="max-w-md text-sm leading-relaxed text-foreground/62">
+          <p className="max-w-md text-sm leading-relaxed text-foreground/86">
             The product is serious enough to answer the skeptical questions up front: what gets analyzed, where limits apply, and what the tool should never replace.
           </p>
-          <div className="rounded-[1.5rem] border border-dashed border-border/80 bg-[#faf5eb] p-5">
+          <div className="rounded-[1.5rem] border border-dashed border-border bg-[#faf5eb] p-5">
             <p className="text-[11px] font-mono uppercase tracking-[0.2em] text-muted-foreground">Trust note</p>
             <p className="mt-3 text-sm leading-relaxed text-foreground/68">
               agpAIso is built to support judgment, not perform it for you. That positioning should be visible in the interface, not buried in documentation.
@@ -68,7 +68,7 @@ export default function FaqSection() {
                   aria-expanded={isOpen}
                 >
                   <div>
-                    <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground">0{index + 1}</p>
+                    <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-foreground/78">0{index + 1}</p>
                     <span className="mt-2 block font-medium text-foreground">{item.question}</span>
                   </div>
                   <ChevronDown
@@ -84,7 +84,7 @@ export default function FaqSection() {
                   }`}
                 >
                   <div className="overflow-hidden">
-                    <p className="px-5 pb-5 text-sm leading-relaxed text-foreground/70">
+                    <p className="px-5 pb-5 text-sm leading-relaxed text-foreground/86">
                       {item.answer}
                     </p>
                   </div>

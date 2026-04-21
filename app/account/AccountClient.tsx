@@ -53,7 +53,7 @@ export default function AccountClient({ user, googleConfigured }: AccountClientP
 
   return (
     <div className="min-h-screen bg-background font-sans">
-      <header className="border-b border-border/80 bg-background px-4 py-3 flex items-center justify-between">
+      <header className="border-b border-border bg-background px-4 py-3 flex items-center justify-between">
         <Link
           href="/"
           className="font-serif text-xl font-bold text-foreground"
@@ -75,23 +75,23 @@ export default function AccountClient({ user, googleConfigured }: AccountClientP
         </div>
 
         <div className="editorial-shell rounded-2xl p-6">
-          <h2 className="text-lg font-semibold text-foreground mb-4">Profile</h2>
+          <h2 className="text-lg font-medium text-foreground mb-4">Profile</h2>
           <div className="flex items-center gap-4">
-            <div className="flex h-14 w-14 select-none items-center justify-center rounded-full border border-primary/15 bg-primary/10 text-xl font-bold text-primary">
+            <div className="flex h-14 w-14 select-none items-center justify-center rounded-full border border-border bg-primary text-xl font-medium text-primary-foreground">
               {initials}
             </div>
             <div>
-              <p className="font-semibold text-foreground">{user.fullName}</p>
-              <p className="text-sm text-foreground/60">{user.email}</p>
+              <p className="font-medium text-foreground">{user.fullName}</p>
+              <p className="text-sm text-foreground/84">{user.email}</p>
             </div>
           </div>
         </div>
 
         <div className="editorial-shell rounded-2xl p-6">
-          <h2 className="text-lg font-semibold text-foreground mb-1">Connected Accounts</h2>
-          <p className="text-sm text-foreground/60 mb-4">Manage how you sign in to agpAIso.</p>
+          <h2 className="text-lg font-medium text-foreground mb-1">Connected Accounts</h2>
+          <p className="text-sm text-foreground/84 mb-4">Manage how you sign in to agpAIso.</p>
 
-          <div className="border-t border-border/75 pt-4 space-y-3">
+          <div className="border-t border-border pt-4 space-y-3">
             <div className="flex items-center justify-between gap-4">
               <div className="flex items-center gap-3 shrink-0">
                 <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24">
@@ -102,7 +102,7 @@ export default function AccountClient({ user, googleConfigured }: AccountClientP
                 </svg>
                 <div>
                   <p className="text-sm font-medium text-foreground">Google</p>
-                  <p className="text-xs text-foreground/50">
+                  <p className="text-xs text-foreground/76">
                     {user.hasGoogle ? 'Connected' : 'Not connected'}
                   </p>
                 </div>
@@ -114,14 +114,14 @@ export default function AccountClient({ user, googleConfigured }: AccountClientP
                   onClick={handleUnlinkGoogle}
                   disabled={isUnlinking || !user.hasPassword}
                   title={!user.hasPassword ? 'Set a password before disconnecting Google' : undefined}
-                  className="focus-ring min-h-10 shrink-0 rounded-md px-2 text-sm font-medium text-[#7a3e31] transition-colors hover:text-[#633328] disabled:cursor-not-allowed disabled:opacity-40"
+                  className="focus-ring min-h-10 shrink-0 rounded-md px-2 text-sm font-medium text-foreground transition-colors hover:text-primary disabled:cursor-not-allowed disabled:opacity-40"
                 >
                   {isUnlinking ? 'Disconnecting…' : 'Disconnect'}
                 </button>
               ) : googleConfigured ? (
                 <GoogleSignInButton mode="link" />
               ) : (
-                <span className="text-xs italic text-foreground/45">Not configured</span>
+                <span className="text-xs italic text-foreground/72">Not configured</span>
               )}
             </div>
 
@@ -132,14 +132,14 @@ export default function AccountClient({ user, googleConfigured }: AccountClientP
             )}
           </div>
 
-          <div className="mt-4 border-t border-border/75 pt-4">
+          <div className="mt-4 border-t border-border pt-4">
             <div className="flex items-center gap-3">
-              <svg className="w-5 h-5 shrink-0 text-foreground/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <svg className="w-5 h-5 shrink-0 text-foreground/72" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
               </svg>
               <div>
                 <p className="text-sm font-medium text-foreground">Password</p>
-                <p className="text-xs text-foreground/50">
+                <p className="text-xs text-foreground/76">
                   {user.hasPassword ? 'Set' : 'Not set — Google sign-in only'}
                 </p>
               </div>

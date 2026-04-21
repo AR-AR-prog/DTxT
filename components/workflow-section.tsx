@@ -27,7 +27,7 @@ export default function WorkflowSection() {
   ]
 
   return (
-    <section className="border-y border-border/70 bg-secondary/35 py-24">
+    <section className="border-y border-border bg-secondary/35 py-24">
       <div className="mx-auto max-w-7xl px-6">
         <div className="mb-6 flex items-start justify-between gap-6">
           <div>
@@ -47,17 +47,17 @@ export default function WorkflowSection() {
           {steps.map((step, index) => (
             <div key={step.number} className="relative">
               <div className="editorial-shell h-full rounded-[1.6rem] p-5">
-                <div className="mb-5 flex items-center justify-between gap-3 border-b border-border/70 pb-4">
-                  <span className="text-xs font-mono tracking-[0.22em] text-muted-foreground">STEP {step.number}</span>
-                  <span className="rounded-full border border-border/70 bg-secondary/60 px-2.5 py-1 text-[10px] font-mono uppercase tracking-[0.16em] text-foreground/68">
+                <div className="mb-5 flex items-center justify-between gap-3 border-b border-border pb-4">
+                  <span className="text-xs font-mono tracking-[0.22em] text-foreground/80">STEP {step.number}</span>
+                  <span className="rounded-full border border-border bg-muted px-2.5 py-1 text-[10px] font-mono uppercase tracking-[0.16em] text-foreground/92">
                     desk action
                   </span>
                 </div>
-                <div className="relative mb-6 flex aspect-square items-center justify-center overflow-hidden rounded-[1.3rem] border border-border/70 bg-[#f8f3ea]">
+                <div className="relative mb-6 flex aspect-square items-center justify-center overflow-hidden rounded-[1.3rem] border border-border bg-[#f8f3ea]">
                   {step.visual === "url" && (
-                    <div className="w-4/5 rounded-2xl border border-border/70 bg-card px-3 py-3 shadow-sm">
+                    <div className="w-4/5 rounded-2xl border border-border bg-card px-3 py-3 shadow-sm">
                       <p className="text-[9px] font-mono text-muted-foreground">INPUT</p>
-                      <p className="mt-1 truncate text-[10px] text-foreground/60">https://example.com/article...</p>
+                      <p className="mt-1 truncate text-[10px] text-foreground/84">https://example.com/article...</p>
                     </div>
                   )}
                   {step.visual === "scan" && (

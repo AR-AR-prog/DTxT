@@ -1,53 +1,55 @@
 'use client'
 
-import { AlertTriangle, CheckCircle2, XCircle } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { AlertTriangle, CheckCircle2, XCircle, Fingerprint, Scale } from 'lucide-react'
 
-type StatusKind = 'correct' | 'incorrect' | 'lacks'
+type StatusKind = 'strong' | 'context' | 'review' | 'low' | 'not_credible'
 
-function getStatus(verdict: string): StatusKind {
-  const v = verdict.toLowerCase()
-  if (v.includes('highly credible') || v.includes('credible')) return 'correct'
-  if (v.includes('not credible') || v.includes('low credibility')) return 'incorrect'
-  return 'lacks'
+const meterColors = [
+  '#D05718', '#C87A1A', '#C87A1A', '#B89020',
+  '#8FA020', '#5EA828', '#3AA042', '#27885C',
+  '#1D6E4E', '#1D4432',
+]
+
+function getStatus(score: number): StatusKind {
+  if (score >= 8) return 'strong'
+  if (score >= 6) return 'context'
+  if (score >= 4) return 'review'
+  if (score >= 2) return 'low'
+  return 'not_credible'
 }
 
 function statusStyles(kind: StatusKind) {
   switch (kind) {
-    case 'correct':
-      return 'verdict-strong'
-    case 'incorrect':
-      return 'verdict-risk'
-    default:
-      return 'verdict-caution'
+    case 'strong': return 'verdict-strong'
+    case 'context': return 'verdict-context'
+    case 'review': return 'verdict-caution'
+    case 'low': return 'verdict-low'
+    case 'not_credible': return 'verdict-risk'
   }
 }
 
 function statusIcon(kind: StatusKind) {
   switch (kind) {
-    case 'correct':
+    case 'strong':
+    case 'context':
       return <CheckCircle2 className="w-3.5 h-3.5" />
-    case 'incorrect':
+    case 'low':
+    case 'not_credible':
       return <XCircle className="w-3.5 h-3.5" />
-    default:
+    case 'review':
       return <AlertTriangle className="w-3.5 h-3.5" />
   }
 }
 
 function statusLabel(kind: StatusKind) {
   switch (kind) {
-    case 'correct':
-      return 'Strong credibility'
-    case 'incorrect':
-      return 'Needs scrutiny'
-    default:
-      return 'Insufficient support'
+    case 'strong': return 'Strong credibility'
+    case 'context': return 'Credible with context'
+    case 'review': return 'Review recommended'
+    case 'low': return 'Low credibility'
+    case 'not_credible': return 'Not credible'
   }
-}
-
-function progressColor(score: number) {
-  if (score >= 7) return 'bg-emerald-500'
-  if (score >= 4) return 'bg-amber-500'
-  return 'bg-[#8e5444]'
 }
 
 function confidenceBand(score: number) {
@@ -75,108 +77,115 @@ interface ResultCardProps {
 }
 
 export default function ResultCard({ analysis }: ResultCardProps) {
-  const status = getStatus(analysis.verdict)
-  const score = Math.min(10, Math.max(0, analysis.score))
+  const score = Math.min(10, Math.max(1, analysis.score))
+  const status = getStatus(score)
   const segments = Array.from({ length: 10 }, (_, i) => i + 1)
   const band = confidenceBand(score)
   const guidance = reviewGuidance(score)
+  const [animateMeter, setAnimateMeter] = useState(false)
+
+  useEffect(() => {
+    const t = setTimeout(() => setAnimateMeter(true), 100)
+    return () => clearTimeout(t)
+  }, [])
 
   return (
-    <div className="editorial-shell animate-in fade-in slide-in-from-bottom-2 overflow-hidden rounded-2xl rounded-bl-md duration-500">
-      <div className="border-b border-border/70 bg-[#f8f3ea]/80 px-4 py-3">
+    <div className="w-full">
+      {/* Header bar */}
+      <div className="border-b border-dashed border-[#1A1A1A]/10 bg-white/50 px-5 py-3">
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <p className="text-[10px] font-mono uppercase tracking-[0.22em] text-foreground/45">Evidence brief</p>
-          <span
-            className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border ${statusStyles(status)}`}
-          >
+          <div className="flex items-center gap-2">
+            <Fingerprint className="w-3.5 h-3.5 text-foreground/30" />
+            <p className="text-[9px] font-mono uppercase tracking-[0.44em] text-foreground/40">Evidence brief</p>
+          </div>
+          <span className={`inline-flex items-center gap-1.5 rounded border px-2.5 py-1 text-xs font-medium ${statusStyles(status)}`}>
             {statusIcon(status)}
             {statusLabel(status)}
           </span>
         </div>
       </div>
 
-      <div className="space-y-5 p-4 text-foreground">
-        <div className="grid gap-2 sm:grid-cols-2">
-          <div className="rounded-lg border border-border/70 bg-[#faf6ee] px-3 py-2">
-            <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-foreground/45">Confidence band</p>
-            <p className="mt-1 text-sm font-medium text-foreground/85">{band}</p>
-          </div>
-          <div className="rounded-lg border border-border/70 bg-white/80 px-3 py-2">
-            <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-foreground/45">Review guidance</p>
-            <p className="mt-1 text-xs leading-relaxed text-foreground/70">{guidance}</p>
-          </div>
-        </div>
+      <div className="space-y-4 p-5 text-foreground">
 
-        <div className="rounded-[1.2rem] border border-border/75 bg-[#faf6ee] p-3">
-          <div className="mb-1 flex items-end justify-between gap-3">
-            <span className="text-sm font-medium">Credibility score</span>
-            <span className="font-serif text-3xl font-bold tabular-nums text-foreground">
+        {/* Score meter */}
+        <div className="rounded-2xl border border-dashed border-[#1A1A1A]/10 bg-white/60 p-4">
+          <div className="mb-2 flex items-end justify-between gap-3">
+            <span className="text-[9px] font-mono uppercase tracking-[0.32em] text-foreground/50">Credibility score</span>
+            <span className="font-serif text-4xl font-bold tabular-nums text-foreground">
               {score}
-              <span className="ml-1 text-xs font-mono text-foreground/40">/10</span>
+              <span className="ml-1 text-xs font-mono text-foreground/50">/10</span>
             </span>
           </div>
           <div className="flex items-center gap-1">
             {segments.map((seg) => (
               <div
                 key={seg}
-                className={`h-1.5 flex-1 rounded-sm transition-all duration-500 ${
-                  seg <= score ? progressColor(score) : 'bg-border/70'
-                }`}
-                style={{ transitionDelay: `${seg * 35}ms` }}
+                className={`h-1.5 flex-1 rounded-sm transition-opacity duration-500`}
+                style={{
+                  backgroundColor: meterColors[seg - 1],
+                  opacity: animateMeter ? (seg <= score ? 1 : 0.15) : 0.15,
+                  transitionDelay: animateMeter ? `${seg * 40}ms` : '0ms',
+                }}
               />
             ))}
           </div>
+          <div className="mt-2 flex items-center justify-between">
+            <span className="text-[10px] text-foreground/50 font-mono">{band}</span>
+            <span className="text-[10px] text-foreground/40 font-mono italic">{guidance}</span>
+          </div>
         </div>
 
+        {/* Verdict */}
         {analysis.verdict && (
-          <div className="rounded-xl border border-border/70 bg-white/85 px-3 py-3">
-            <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-foreground/45">Verdict line</p>
-            <p className="mt-2 font-serif text-xl leading-snug text-foreground">{analysis.verdict}</p>
+          <div className="rounded-2xl border border-dashed border-[#1A1A1A]/10 bg-white/60 px-4 py-3">
+            <div className="flex items-center gap-2 mb-1.5">
+              <Scale className="w-3 h-3 text-foreground/30" />
+              <p className="text-[9px] font-mono uppercase tracking-[0.44em] text-foreground/40">Verdict line</p>
+            </div>
+            <p className="font-serif text-xl leading-snug text-foreground">{analysis.verdict}</p>
           </div>
         )}
 
+        {/* Summary + Reasoning */}
         <div className="grid gap-3 sm:grid-cols-2">
           {analysis.summary && (
-            <div className="rounded-xl border border-border/70 bg-white/85 p-3">
-              <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-foreground/45">Summary</p>
-              <p className="mt-2 text-sm leading-relaxed font-medium text-foreground/90">{analysis.summary}</p>
+            <div className="rounded-2xl border border-dashed border-[#1A1A1A]/10 bg-white/60 p-3">
+              <p className="text-[9px] font-mono uppercase tracking-[0.44em] text-foreground/40 mb-1.5">Summary</p>
+              <p className="text-sm leading-relaxed font-medium text-foreground">{analysis.summary}</p>
             </div>
           )}
-
           {analysis.reasoning && (
-            <div className="rounded-xl border border-border/70 bg-[#f2f6f9] p-3">
-              <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-foreground/45">Reasoning</p>
-              <p className="mt-2 text-sm leading-relaxed text-foreground/80">{analysis.reasoning}</p>
+            <div className="rounded-2xl border border-dashed border-[#1A1A1A]/10 bg-white/60 p-3">
+              <p className="text-[9px] font-mono uppercase tracking-[0.44em] text-foreground/40 mb-1.5">Reasoning</p>
+              <p className="text-sm leading-relaxed text-foreground/85">{analysis.reasoning}</p>
             </div>
           )}
         </div>
 
-        {analysis.factors && analysis.factors.length > 0 && (
-          <div className="border-t border-border/70 pt-2">
-            <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-foreground/70">
-              Counter-facts
-            </p>
+        {/* Counter-facts */}
+        {analysis.factors && analysis.factors.length > 0 ? (
+          <div>
+            <div className="flex items-center gap-2 mb-2">
+              <Fingerprint className="w-3 h-3 text-foreground/30" />
+              <p className="text-[9px] font-mono uppercase tracking-[0.44em] text-foreground/40">Counter-facts</p>
+            </div>
             <ul className="space-y-2 text-sm">
               {analysis.factors.map((f, i) => (
-                <li key={i} className="flex gap-2.5 rounded-lg border border-border/75 bg-white/75 p-3">
-                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#f2e7cf] text-[10px] font-bold text-[#7b5f33]">
+                <li key={i} className="flex gap-2.5 rounded-2xl border border-dashed border-[#1A1A1A]/10 bg-white/60 p-3">
+                  <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-foreground/8 text-[9px] font-mono font-bold text-foreground/60">
                     {i + 1}
                   </span>
-                  <span className="leading-relaxed text-foreground/85">{f}</span>
+                  <span className="leading-relaxed text-foreground/90">{f}</span>
                 </li>
               ))}
             </ul>
           </div>
-        )}
-
-        {(!analysis.factors || analysis.factors.length === 0) && (
-          <div className="border-t border-border/70 pt-2">
-            <div className="rounded-lg border border-border/75 bg-white/75 px-3 py-3">
-              <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-foreground/45">Counter-facts</p>
-              <p className="mt-1 text-sm leading-relaxed text-foreground/72">
-                No explicit counter-facts were surfaced for this source. Continue with manual corroboration if this will be cited.
-              </p>
-            </div>
+        ) : (
+          <div className="rounded-2xl border border-dashed border-[#1A1A1A]/10 bg-white/60 px-4 py-3">
+            <p className="text-[9px] font-mono uppercase tracking-[0.44em] text-foreground/40 mb-1">Counter-facts</p>
+            <p className="text-sm leading-relaxed text-foreground/70">
+              No explicit counter-facts surfaced. Continue with manual corroboration if citing this source.
+            </p>
           </div>
         )}
       </div>

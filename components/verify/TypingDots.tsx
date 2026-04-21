@@ -1,20 +1,20 @@
 'use client'
 
+import { motion } from 'framer-motion'
+
 export default function TypingDots() {
   return (
-    <div className="flex items-center gap-1 px-4 py-3 animate-in fade-in slide-in-from-bottom-2 duration-300">
-      <span
-        className="w-2 h-2 rounded-full bg-[#1b5e4a]/60 animate-bounce"
-        style={{ animationDelay: '0ms', animationDuration: '0.6s' }}
-      />
-      <span
-        className="w-2 h-2 rounded-full bg-[#1b5e4a]/60 animate-bounce"
-        style={{ animationDelay: '150ms', animationDuration: '0.6s' }}
-      />
-      <span
-        className="w-2 h-2 rounded-full bg-[#1b5e4a]/60 animate-bounce"
-        style={{ animationDelay: '300ms', animationDuration: '0.6s' }}
-      />
-    </div>
+    <motion.div 
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+      className="flex justify-start my-2"
+    >
+      <div className="flex items-center gap-1.5 px-4 py-3 rounded-3xl rounded-bl-md border border-black/5 bg-background shadow-sm">
+        <motion.span animate={{ y: [0, -4, 0] }} transition={{ duration: 0.9, repeat: Infinity, delay: 0 }} className="w-1.5 h-1.5 rounded-full bg-foreground/40" />
+        <motion.span animate={{ y: [0, -4, 0] }} transition={{ duration: 0.9, repeat: Infinity, delay: 0.18 }} className="w-1.5 h-1.5 rounded-full bg-foreground/40" />
+        <motion.span animate={{ y: [0, -4, 0] }} transition={{ duration: 0.9, repeat: Infinity, delay: 0.36 }} className="w-1.5 h-1.5 rounded-full bg-foreground/40" />
+      </div>
+    </motion.div>
   )
 }

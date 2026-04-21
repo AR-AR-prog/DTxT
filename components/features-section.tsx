@@ -24,9 +24,9 @@ const features = [
   },
   {
     title: "Academic Research Ready",
-    description: "Built for CCIS students. Quick citation checks, source vetting, and structured reasoning you can quote or reference.",
+    description: "Built for students. Quick citation checks, source vetting, and structured reasoning you can quote or reference.",
     icon: BookOpen,
-    accent: "bg-emerald-100 text-emerald-700",
+    accent: "bg-muted text-primary",
   },
   {
     title: "Secure Account-Based Access",
@@ -58,7 +58,7 @@ export default function FeaturesSection() {
             <h2 className="font-serif text-4xl md:text-5xl font-bold text-foreground text-balance max-w-xl">
               One verification desk, six capabilities that hold up under scrutiny.
             </h2>
-            <p className="text-foreground/55 text-sm max-w-xs sm:text-right">
+            <p className="text-foreground/80 text-sm max-w-xs sm:text-right">
               No novelty features. Each capability is tuned for confidence, traceability, and fast reading.
             </p>
           </div>
@@ -78,11 +78,11 @@ export default function FeaturesSection() {
                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-5 ${feature.accent}`}>
                   <Icon className="w-5 h-5" />
                 </div>
-                <p className="mb-2 text-[10px] font-mono uppercase tracking-[0.2em] text-foreground/62">Desk module</p>
+                <p className="mb-2 text-[10px] font-mono uppercase tracking-[0.2em] text-foreground/86">Desk module</p>
                 <h3 className="font-serif text-lg font-bold text-foreground mb-2 leading-snug">
                   {feature.title}
                 </h3>
-                <p className="text-sm text-foreground/60 leading-relaxed">
+                <p className="text-sm text-foreground/84 leading-relaxed">
                   {feature.description}
                 </p>
               </div>

@@ -90,7 +90,7 @@ export default function BillingClient({ user }: BillingClientProps) {
 
   return (
     <div className="min-h-screen bg-background font-sans">
-      <header className="border-b border-border/80 bg-background px-4 py-3 flex items-center justify-between">
+      <header className="border-b border-border bg-background px-4 py-3 flex items-center justify-between">
         <Link
           href="/"
           className="font-serif text-xl font-bold text-foreground"
@@ -98,7 +98,7 @@ export default function BillingClient({ user }: BillingClientProps) {
           agpAIso
         </Link>
         <div className="flex items-center gap-3">
-          <span className="hidden sm:inline text-sm text-foreground/70">{user.email}</span>
+          <span className="hidden sm:inline text-sm text-foreground/82">{user.email}</span>
           <Link href="/verify" className="focus-ring text-sm font-medium text-primary hover:underline">
             ← Back to Verify
           </Link>
@@ -111,26 +111,26 @@ export default function BillingClient({ user }: BillingClientProps) {
             <span className="section-kicker">Billing desk</span>
             <h1 className="mt-4 font-serif text-4xl leading-tight text-foreground">Plan headroom and usage at a glance.</h1>
           </div>
-          <p className="max-w-xs text-sm text-foreground/60 sm:text-right">Compare free, pro, and unlimited quickly, then choose when you need more research capacity.</p>
+          <p className="max-w-xs text-sm text-foreground/84 sm:text-right">Compare free, pro, and unlimited quickly, then choose when you need more research capacity.</p>
         </div>
 
         <div className="editorial-shell rounded-[1.6rem] p-6">
-          <h2 className="text-lg font-semibold text-foreground mb-1">Your Usage</h2>
-          <p className="text-sm text-foreground/60 mb-4">Free plan usage resets every 12:00 AM Philippine Time (PHT)</p>
+          <h2 className="text-lg font-medium text-foreground mb-1">Your Usage</h2>
+          <p className="text-sm text-foreground/84 mb-4">Free plan usage resets every 12:00 AM Philippine Time (PHT)</p>
 
           <div className="flex justify-between text-sm mb-2">
-            <span className="text-foreground/70">Searches used</span>
-            <span className="font-semibold tabular-nums text-foreground">
+            <span className="text-foreground/82">Searches used</span>
+            <span className="font-medium tabular-nums text-foreground">
               {used} / {limit}
             </span>
           </div>
-          <div className="h-3 w-full overflow-hidden rounded-full bg-border/80">
+          <div className="h-3 w-full overflow-hidden rounded-full bg-border">
             <div
               className={`h-full rounded-full transition-all duration-500 ${barColor}`}
               style={{ width: `${usagePercent}%` }}
             />
           </div>
-          <p className="text-xs text-foreground/55 mt-2">
+          <p className="text-xs text-foreground/80 mt-2">
             {isAtLimit
               ? 'You have used all your free searches. Upgrade to continue.'
               : `${remaining} search${remaining === 1 ? '' : 'es'} remaining`}
@@ -140,7 +140,7 @@ export default function BillingClient({ user }: BillingClientProps) {
             <div className="verdict-caution mt-4 flex items-start gap-3 rounded-xl border px-4 py-3">
               <span className="text-lg mt-0.5">⚠</span>
               <div>
-                <p className="text-sm font-semibold">Search limit reached</p>
+                <p className="text-sm font-medium">Search limit reached</p>
                 <p className="text-xs mt-0.5">
                   You&apos;ve used all {limit} free checks for today. Your balance resets automatically at 12:00 AM Philippine Time (PHT).
                 </p>
@@ -153,9 +153,9 @@ export default function BillingClient({ user }: BillingClientProps) {
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-6">
             <div>
               <h2 className="text-2xl font-serif font-bold text-foreground mb-2">Choose a Plan</h2>
-              <p className="text-sm text-foreground/60">Upgrade anytime. Cancel anytime.</p>
+              <p className="text-sm text-foreground/84">Upgrade anytime. Cancel anytime.</p>
             </div>
-            <div className="inline-flex rounded-full border border-border/80 bg-white/90 p-1" role="tablist" aria-label="Billing cycle selector">
+            <div className="inline-flex rounded-full border border-border bg-card p-1" role="tablist" aria-label="Billing cycle selector">
               <button
                 type="button"
                 onClick={() => setBillingCycle('monthly')}
@@ -163,8 +163,8 @@ export default function BillingClient({ user }: BillingClientProps) {
                 aria-selected={billingCycle === 'monthly'}
                 className={`focus-ring px-3 py-1.5 text-xs rounded-full transition ${
                   billingCycle === 'monthly'
-                    ? 'bg-primary text-white'
-                    : 'text-foreground/60 hover:text-foreground'
+                    ? 'bg-primary text-primary-foreground'
+                    : 'text-foreground/84 hover:text-foreground'
                 }`}
               >
                 Monthly
@@ -176,8 +176,8 @@ export default function BillingClient({ user }: BillingClientProps) {
                 aria-selected={billingCycle === 'yearly'}
                 className={`focus-ring px-3 py-1.5 text-xs rounded-full transition ${
                   billingCycle === 'yearly'
-                    ? 'bg-primary text-white'
-                    : 'text-foreground/60 hover:text-foreground'
+                    ? 'bg-primary text-primary-foreground'
+                    : 'text-foreground/84 hover:text-foreground'
                 }`}
               >
                 Yearly (-20%)
@@ -187,19 +187,19 @@ export default function BillingClient({ user }: BillingClientProps) {
 
           <div className="mb-5 grid gap-3 sm:grid-cols-3">
             <div className="document-card px-4 py-3">
-              <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-foreground/45">Free</p>
+              <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-foreground/82">Free</p>
               <p className="mt-1 font-serif text-2xl text-foreground">50/day</p>
-              <p className="text-xs text-foreground/58">Best for occasional source checks.</p>
+              <p className="text-xs text-foreground/90">Best for occasional source checks.</p>
             </div>
             <div className="document-card px-4 py-3">
-              <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-foreground/45">Pro</p>
+              <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-foreground/82">Pro</p>
               <p className="mt-1 font-serif text-2xl text-foreground">200/mo</p>
-              <p className="text-xs text-foreground/58">Better for repeat coursework and projects.</p>
+              <p className="text-xs text-foreground/90">Better for repeat coursework and projects.</p>
             </div>
             <div className="document-card px-4 py-3">
-              <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-foreground/45">Unlimited</p>
+              <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-foreground/82">Unlimited</p>
               <p className="mt-1 font-serif text-2xl text-foreground">No cap</p>
-              <p className="text-xs text-foreground/58">For high-volume verification workflows.</p>
+              <p className="text-xs text-foreground/90">For high-volume verification workflows.</p>
             </div>
           </div>
 
@@ -230,7 +230,7 @@ export default function BillingClient({ user }: BillingClientProps) {
                   }`}
                 >
                   {plan.highlight && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-primary px-3 py-1 text-xs font-mono text-white whitespace-nowrap">
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded border border-border bg-primary px-3 py-1 text-xs font-mono text-primary-foreground whitespace-nowrap">
                       ◆ MOST POPULAR
                     </div>
                   )}
@@ -238,34 +238,34 @@ export default function BillingClient({ user }: BillingClientProps) {
                   <div className="mb-4">
                     <div className="flex items-center gap-2 mb-1">
                       {Icon && <Icon className="w-4 h-4 text-primary" />}
-                      <span className="text-xs font-mono text-foreground/50 uppercase tracking-widest">
+                      <span className="text-xs font-mono text-foreground/84 uppercase tracking-widest">
                         {plan.name}
                       </span>
                     </div>
                     <div className="flex items-baseline gap-1">
                       <span className="text-3xl font-serif font-bold text-foreground">{displayPrice}</span>
                       {displayPeriod && (
-                        <span className="text-sm text-foreground/50">{displayPeriod}</span>
+                        <span className="text-sm text-foreground/84">{displayPeriod}</span>
                       )}
                     </div>
-                    <p className="text-xs text-foreground/60 mt-1">{plan.description}</p>
+                    <p className="text-xs text-foreground/92 mt-1">{plan.description}</p>
                   </div>
 
                   <ul className="space-y-2 mb-5 flex-1">
                     {plan.features.map((f) => (
-                      <li key={f} className="flex items-start gap-2 text-xs text-foreground/80">
-                        <Check className="w-3.5 h-3.5 text-emerald-600 mt-0.5 shrink-0" />
+                      <li key={f} className="flex items-start gap-2 text-xs text-foreground/92">
+                        <Check className="w-3.5 h-3.5 text-primary mt-0.5 shrink-0" />
                         {f}
                       </li>
                     ))}
                   </ul>
 
                   {isCurrent ? (
-                    <div className="w-full py-2.5 rounded-full text-sm font-medium text-center bg-border/80 text-foreground/50 cursor-default">
+                    <div className="w-full py-2.5 rounded-full text-sm font-medium text-center bg-border/80 text-foreground/86 cursor-default">
                       Current Plan
                     </div>
                   ) : selectedPlan === plan.id ? (
-                    <div className="w-full py-2.5 rounded-full text-sm font-medium text-center bg-primary/10 border border-primary/20 text-primary">
+                    <div className="w-full py-2.5 rounded text-sm font-medium text-center bg-muted border border-border text-foreground">
                       Billing checkout coming soon
                     </div>
                   ) : (
@@ -274,8 +274,8 @@ export default function BillingClient({ user }: BillingClientProps) {
                       onClick={() => setSelectedPlan(plan.id)}
                       className={`focus-ring min-h-11 w-full py-2.5 rounded-full text-sm font-medium transition-colors ${
                         plan.highlight
-                          ? 'bg-primary text-white hover:bg-primary/90'
-                          : 'border border-border/80 bg-white/75 text-foreground hover:bg-white'
+                          ? 'bg-primary text-primary-foreground hover:bg-secondary'
+                          : 'border border-border bg-card text-foreground hover:bg-muted'
                       }`}
                     >
                       {plan.cta}
@@ -287,7 +287,7 @@ export default function BillingClient({ user }: BillingClientProps) {
           </div>
         </div>
 
-        <p className="text-center text-xs text-foreground/45">
+        <p className="text-center text-xs text-foreground/72">
           Questions?{' '}
           <a href="mailto:support@agpaiso.com" className="underline hover:text-foreground/70">
             Contact support

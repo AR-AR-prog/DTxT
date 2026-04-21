@@ -36,18 +36,18 @@ export default function CTASection() {
               Give every source the scrutiny it deserves.
             </h2>
 
-            <p className="mx-auto max-w-2xl text-base text-foreground/60 sm:text-lg">
+            <p className="mx-auto max-w-2xl text-base text-foreground/84 sm:text-lg">
               Open the desk, paste a URL, and get a calmer answer than the internet usually gives you. Registration is fast, and the first 50 checks each day are free.
             </p>
 
             <div className="flex flex-col justify-center gap-3 pt-2 sm:flex-row">
               <Link href="/register" className="inline-block">
-                <Button size="lg" className="focus-ring min-h-11 rounded-full border border-accent/20 bg-accent px-8 shadow-[0_16px_34px_rgba(47,91,135,0.24)] transition-all duration-200 hover:scale-[1.02] hover:bg-accent/92 active:scale-[0.98]">
+                <Button size="lg" className="focus-ring min-h-11 rounded-full bg-primary px-8 text-primary-foreground transition-all duration-200 hover:scale-[1.02] hover:bg-secondary active:scale-[0.98]">
                   Create free account
                 </Button>
               </Link>
               <Link href="/login" className="inline-block">
-                <Button size="lg" variant="outline" className="focus-ring min-h-11 rounded-full border-border/80 bg-white/78 px-8 transition-all duration-200 hover:scale-[1.02] hover:bg-white active:scale-[0.98]">
+                <Button size="lg" variant="outline" className="focus-ring min-h-11 rounded-full border-border bg-card px-8 transition-all duration-200 hover:scale-[1.02] hover:bg-muted active:scale-[0.98]">
                   Continue with login
                 </Button>
               </Link>
@@ -55,7 +55,7 @@ export default function CTASection() {
 
             <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
               {trustSignals.map((signal) => (
-                <span key={signal} className="flex items-center gap-1.5 text-xs text-foreground/52">
+                <span key={signal} className="flex items-center gap-1.5 text-xs text-foreground/78">
                   <span className="text-primary">•</span>
                   {signal}
                 </span>
