@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { GoogleSignInButton } from '@/components/google-sign-in-button'
+import { LogoMark } from '@/components/logo-mark'
 
 interface AccountClientProps {
   user: {
@@ -54,12 +55,7 @@ export default function AccountClient({ user, googleConfigured }: AccountClientP
   return (
     <div className="min-h-screen bg-background font-sans">
       <header className="border-b border-border bg-background px-4 py-3 flex items-center justify-between">
-        <Link
-          href="/"
-          className="font-serif text-xl font-bold text-foreground"
-        >
-          agpAIso
-        </Link>
+        <LogoMark size="sm" />
         <div className="flex items-center gap-3">
           <span className="hidden sm:inline text-sm text-foreground/70">{user.email}</span>
           <Link href="/verify" className="focus-ring text-sm font-medium text-primary hover:underline">

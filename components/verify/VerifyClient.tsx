@@ -19,6 +19,7 @@ type Message =
         verdict: string
         factors?: string[]
       }
+      backerInformation?: import('@/lib/web-search').RelatedSources
       error?: string
       limitReached?: boolean
     }
@@ -106,7 +107,7 @@ export default function VerifyClient({ user }: VerifyClientProps) {
             type: 'ai',
             createdAt: Date.now(),
             ...(res.ok && data.analysis
-              ? { analysis: data.analysis }
+              ? { analysis: data.analysis, backerInformation: data.backerInformation }
               : {
                   error: isLimitReached
                     ? undefined
@@ -272,6 +273,7 @@ export default function VerifyClient({ user }: VerifyClientProps) {
               key={m.id}
               type="ai"
               analysis={m.analysis}
+              backerInformation={m.backerInformation}
               error={m.error}
               timestampLabel={formatTime(m.createdAt)}
             />

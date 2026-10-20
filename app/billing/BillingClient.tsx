@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { Check, Zap, Infinity } from 'lucide-react'
+import { LogoMark } from '@/components/logo-mark'
 
 interface BillingClientProps {
   user: {
@@ -91,12 +92,7 @@ export default function BillingClient({ user }: BillingClientProps) {
   return (
     <div className="min-h-screen bg-background font-sans">
       <header className="border-b border-border bg-background px-4 py-3 flex items-center justify-between">
-        <Link
-          href="/"
-          className="font-serif text-xl font-bold text-foreground"
-        >
-          agpAIso
-        </Link>
+        <LogoMark size="sm" />
         <div className="flex items-center gap-3">
           <span className="hidden sm:inline text-sm text-foreground/82">{user.email}</span>
           <Link href="/verify" className="focus-ring text-sm font-medium text-primary hover:underline">
@@ -223,7 +219,7 @@ export default function BillingClient({ user }: BillingClientProps) {
               return (
                 <div
                   key={plan.id}
-                  className={`editorial-shell relative rounded-2xl p-5 flex flex-col ${
+                  className={`editorial-shell relative rounded-2xl p-5 flex flex-col overflow-visible ${
                     plan.highlight
                       ? 'border-primary/70 ring-1 ring-primary/15'
                       : ''

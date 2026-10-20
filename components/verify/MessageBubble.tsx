@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import ResultCard from './ResultCard'
+import type { RelatedSources } from '@/lib/web-search'
 
 export type MessageBubbleProps =
   | { type: 'user'; content: string; domainLabel?: string; timestampLabel?: string }
@@ -15,6 +16,7 @@ export type MessageBubbleProps =
         verdict: string
         factors?: string[]
       }
+      backerInformation?: RelatedSources
       error?: string
       timestampLabel?: string
     }
@@ -74,7 +76,7 @@ export default function MessageBubble(props: MessageBubbleProps) {
             <div className="mb-1.5 text-[9px] font-mono uppercase tracking-[0.22em] text-foreground/40">Brief generated · {props.timestampLabel}</div>
           )}
           <div className="rounded-3xl rounded-bl-md border border-dashed border-[#1A1A1A]/15 bg-white/70 backdrop-blur-xl shadow-[0_8px_40px_rgba(0,0,0,0.06)] overflow-hidden">
-            <ResultCard analysis={props.analysis} />
+            <ResultCard analysis={props.analysis} backerInformation={props.backerInformation} />
           </div>
         </div>
       </motion.div>

@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react'
 import { AlertTriangle, CheckCircle2, XCircle, Fingerprint, Scale } from 'lucide-react'
+import { BackerInformation } from './BackerInformation'
+import type { RelatedSources } from '@/lib/web-search'
 
 type StatusKind = 'strong' | 'context' | 'review' | 'low' | 'not_credible'
 
@@ -74,9 +76,10 @@ interface ResultCardProps {
     verdict: string
     factors?: string[]
   }
+  backerInformation?: RelatedSources
 }
 
-export default function ResultCard({ analysis }: ResultCardProps) {
+export default function ResultCard({ analysis, backerInformation }: ResultCardProps) {
   const score = Math.min(10, Math.max(1, analysis.score))
   const status = getStatus(score)
   const segments = Array.from({ length: 10 }, (_, i) => i + 1)
@@ -187,6 +190,15 @@ export default function ResultCard({ analysis }: ResultCardProps) {
               No explicit counter-facts surfaced. Continue with manual corroboration if citing this source.
             </p>
           </div>
+        )}
+
+        {/* Backer Information (Cross-Source Verification) */}
+        {backerInformation && (
+          <BackerInformation
+            supporting={backerInformation.supporting}
+            contradicting={backerInformation.contradicting}
+            neutral={backerInformation.neutral}
+          />
         )}
       </div>
     </div>

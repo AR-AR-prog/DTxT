@@ -3,6 +3,7 @@ import { z } from 'zod'
 import { getAuthenticatedUser, hasRemainingUsage, incrementUsage } from '@/lib/api-usage'
 import { fetchArticleTitleAndContent } from '@/lib/fetch-article'
 import { analyzeCredibilityWithGemini } from '@/lib/gemini'
+import { searchRelatedSources, type RelatedSources } from '@/lib/web-search'
 
 const analyzeSchema = z.object({
   url: z.string().url('Invalid URL'),
@@ -99,6 +100,16 @@ export async function POST(request: Request) {
 
   const remaining = user.apiUsageLimit - user.apiUsageCount - 1
 
+  // Search for related sources (cross-source verification)
+  let backerInformation: RelatedSources | undefined
+  try {
+    backerInformation = await searchRelatedSources(title, analysis.summary, [])
+  } catch (searchError) {
+    // Log error but don't fail the request (graceful degradation)
+    console.error('Search API error:', searchError)
+    backerInformation = undefined
+  }
+
   return NextResponse.json({
     success: true,
     url: parsed.data.url,
@@ -110,6 +121,7 @@ export async function POST(request: Request) {
       verdict: analysis.verdict,
       factors: analysis.factors,
     },
+    backerInformation,
     remaining,
   })
 }

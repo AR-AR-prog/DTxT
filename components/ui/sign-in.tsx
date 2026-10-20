@@ -1,7 +1,8 @@
 'use client'
 
 import React, { useState } from 'react';
-import { Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff, ArrowLeft } from 'lucide-react';
+import Link from 'next/link';
 import { GoogleSignInButton } from '@/components/google-sign-in-button'
 import { TestimonialsColumn } from './testimonials-columns-1'
 
@@ -25,58 +26,58 @@ interface SignInPageProps {
 
 const agpAIsoTeam = [
   {
-    avatarSrc: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=256&h=256&auto=format&fit=crop",
+    avatarSrc: "/images/Patrick TOmas.jpg",
     name: "Patrick Tomas",
     handle: "Lead Developer",
-    text: "The API integration is incredibly smooth."
+    text: "Building agpAIso taught me how powerful AI can be when applied to real problems like misinformation."
   },
   {
-    avatarSrc: "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?q=80&w=256&h=256&auto=format&fit=crop",
+    avatarSrc: "/images/Jeiwinfrey Ulep.jpg",
     name: "Jeiwinfrey Ulep",
     handle: "System Architect",
-    text: "World-class forensic UI transitions."
+    text: "Designing the system architecture for agpAIso was a challenge I'm proud of. We built something that actually helps students think critically about what they read online."
   },
   {
-    avatarSrc: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=256&h=256&auto=format&fit=crop",
+    avatarSrc: "/images/Mark Leigh Samoy.jpg",
     name: "Mark Leigh Samoy",
     handle: "Security Analyst",
-    text: "Essential tool for technical research."
+    text: "Fake news is a real threat to students doing research. agpAIso gives them a reliable first line of defense."
   },
   {
-    avatarSrc: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=256&h=256&auto=format&fit=crop",
+    avatarSrc: "/images/France Lagazo.jpg",
     name: "France Lagazo",
     handle: "Project Manager",
-    text: "Architecting the future of verification."
+    text: "Managing this project showed me how much students need a tool like this. We didn't just build an app — we built something that helps people find the truth faster."
   },
   {
     avatarSrc: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=256&h=256&auto=format&fit=crop",
     name: "Dodge Lorenzo",
     handle: "Data Scientist",
-    text: "Finally, an AI detector that doesn't hallucinate."
+    text: "The credibility scoring model we designed gives users a clear, honest picture of a source — no guesswork, just data."
   },
   {
-    avatarSrc: "https://images.unsplash.com/photo-1552058544-f2b08422138a?q=80&w=256&h=256&auto=format&fit=crop",
+    avatarSrc: "/images/charles blanco.jpg",
     name: "Charles Blanco",
     handle: "Software Engineer",
-    text: "Flawless technical methodology."
+    text: "Every line of code in agpAIso was written with one goal: make it easier for students to verify what's real."
   },
   {
-    avatarSrc: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&h=256&auto=format&fit=crop",
+    avatarSrc: "/images/JB Tarun.jpg",
     name: "JB Tarun",
     handle: "Frontend Specialist",
-    text: "A joy to work with these components."
+    text: "I wanted the interface to feel as trustworthy as the tool itself — clean, clear, and honest."
   },
   {
-    avatarSrc: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=256&h=256&auto=format&fit=crop",
+    avatarSrc: "/images/Richmond Tamayo.png",
     name: "Richmond Tamayo",
     handle: "QA Engineer",
-    text: "Highly efficient source verification."
+    text: "Testing agpAIso meant running it against hundreds of real articles. It holds up — and that's something we're genuinely proud of."
   },
   {
-    avatarSrc: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=256&h=256&auto=format&fit=crop",
+    avatarSrc: "/images/adlai angeles.jpg",
     name: "Adlai Angeles",
     handle: "Fullstack Developer",
-    text: "Best tech stack for truth-seeking."
+    text: "From the database to the UI, every part of agpAIso was built to serve one purpose: helping people spot misinformation before it spreads."
   }
 ]
 
@@ -99,12 +100,19 @@ export const SignInPage: React.FC<SignInPageProps> = ({
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="h-[100dvh] flex flex-col md:flex-row w-full bg-[#FDFCFA]">
+    <div className="h-dvh flex flex-col md:flex-row w-full bg-[#FDFCFA]">
       {/* Left column: form */}
       <section className="flex-1 overflow-y-auto">
         <div className="min-h-full flex items-center justify-center p-8">
           <div className="w-full max-w-md py-8">
             <div className="flex flex-col gap-6">
+              <Link
+                href="/"
+                className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors w-fit"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                Back to Home
+              </Link>
               <h1 className="animate-element animate-delay-100 text-4xl md:text-5xl font-semibold leading-tight font-serif">{title}</h1>
               <p className="animate-element animate-delay-200 text-muted-foreground">{description}</p>
 
